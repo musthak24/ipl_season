@@ -53,7 +53,23 @@ def win_percentage_toss(match, season):
     if percentage:
         percentage = percentage
         percentage = round(percentage, 2)
-    return percentage
+
+    list1 = match.filter(season=season, toss_decision='bat').values_list('toss_winner').annotate(
+        dcount=Count('toss_winner')).order_by('-dcount')
+    list2 = match.filter(season=season, toss_decision='field').values_list('toss_winner').annotate(
+        dcount=Count('toss_winner')).order_by('-dcount')
+    list1 = list(list1)
+    list2 = list(list2)
+
+    data = {}
+    for l1 in list1:
+        for l2 in list2:
+            if l1[0] == l2[0]:
+                calc = round(l1[1] / (l1[1] + l2[1]) * 100, 2)
+                data[l1[0]] = calc
+        if l1[0] not in data:
+            data[l1[0]] = 100
+    return percentage, data
 
 
 #
@@ -135,7 +151,7 @@ def get_details(request, pk):
     player_of_match = get_max_player_award(match, season)
 
     location = ge_location_win_more(match, season, winner[0])
-    percentage = win_percentage_toss(match, season)
+    percentage, percent_details = win_percentage_toss(match, season)
     most_matches = location_most_matches(match, season)
 
     high_margin_run = high_margin_win_run(match, season)
@@ -157,4 +173,5 @@ def get_details(request, pk):
                                                   'high_margin_run': high_margin_run,
                                                   'high_margin_wicket': high_margin_wicket,
                                                   'won_toss_match': won_tos_match,
-                                                  'most_catches': most_catches})
+                                                  'most_catches': most_catches,
+                                                  'percent_details': percent_details})

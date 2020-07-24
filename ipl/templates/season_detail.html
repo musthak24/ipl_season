@@ -82,12 +82,23 @@
         <br>
         <table>
             <thead>
-            <th style="background-color: #4f91cd">Percentage of teams decided to bat when they won the toss</th>
+            <th colspan="2" style="background-color: #4f91cd">Percentage of teams decided to bat when they won the toss</th>
             </thead>
             <tbody>
             <tr>
-                <td colspan="4">{{ percentage }} %</td>
+                <td colspan="4">Total Team wise  : {{ percentage }} %</td>
             </tr>
+
+            {% for key, value in percent_details.items %}
+                <tr>
+                <td>
+                  {{ key }}
+                </td>
+                <td>
+                    {{ value }}
+                </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

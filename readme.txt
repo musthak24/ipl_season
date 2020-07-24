@@ -3,6 +3,14 @@ This is the web application for getting ipl season details.
 To run the application make sure the requirements is installed
 
 Django 2.2.3 version is used, Python 3
+
+Create environment variable
+
+virtualenv env
+
+source env/bin/activate
+
+
 To install requirements:
 
 pip install -r requirement.txt

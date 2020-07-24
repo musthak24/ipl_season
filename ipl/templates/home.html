@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p><h4>Choose Season and get Details</h4></p>
+    <div class="form">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><input type="submit" value="Submit"></p>
+        </form>
+    </div>
+
+
+    {#    {% include 'blog/pagination_links.html' %}#}
+
+{% endblock %}

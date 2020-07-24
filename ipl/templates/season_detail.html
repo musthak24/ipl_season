@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block breadcrumb %}<a href="{% url 'home' %}">Back to Home <<</a>{{ block.super }} {% endblock %}
+
+{% block content %}
+    <div style="text-align: center"><h2>Season : {{ season }}</h2></div>
+
+    <div class="para_content">
+        <table>
+            <thead>
+            <th style="background-color: #4f91cd">Top 4 teams</th>
+            </thead>
+            <tbody>
+            {% for win in winner %}
+
+                <div class="blog-item">
+
+                    <tr>
+                        <td>{{ forloop.counter }}.{{ win }}</td>
+                    </tr>
+
+                </div>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="para_content">
+        <table>
+            <thead>
+            <th style="background-color: #4f91cd">Team won the most number of tosses in the season</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="4">1.{{ tos_winner }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="para_content">
+        <br>
+        <table>
+            <thead>
+            <th style="background-color: #4f91cd">Maximum number of Player of the Match award</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="4">1.{{ player_award }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="para_content">
+        <br>
+        <table>
+            <thead>
+            <th style="background-color: #4f91cd">Team won max matches in the whole season</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="4">1.{{ topper }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="para_content">
+        <br>
+        <table>
+            <thead>
+            <th style="background-color: #4f91cd">Location has the most number of wins for the top team</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="4">1.{{ location }} - by {{ topper }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="para_content">
+        <br>
+        <table>
+            <thead>
+            <th style="background-color: #4f91cd">Percentage of teams decided to bat when they won the toss</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="4">{{ percentage }} %</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="para_content">
+        <br>
+        <table>
+            <thead>
+            <th style="background-color: #4f91cd"> Location hosted most number of matches and win % and loss % for the
+                season
+            </th>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="4">{{ most_matches.0 }} - {{ most_matches.1 }} </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="para_content">
+        <br>
+        <table>
+            <thead>
+            <th style="background-color: #4f91cd"> Team won by the highest margin of runs  for the season</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="4">{{ high_margin_run.0.1 }} - {{ high_margin_run.1.1 }} Runs</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="para_content">
+        <br>
+        <table>
+            <thead>
+            <th style="background-color: #4f91cd"> Team won by the highest margin of Wicket  for the season</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="4">{{ high_margin_wicket.0.1 }} - {{ high_margin_wicket.1.1 }} Wickets</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="para_content">
+        <br>
+        <table>
+            <thead>
+            <th colspan="2" style="background-color: #4f91cd"> Team won by the Toss and Match</th>
+            </thead>
+            <tbody>
+            {% for key, value in won_toss_match.items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }} Times</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+     <div class="para_content">
+        <br>
+        <table>
+            <thead>
+            <th colspan="2" style="background-color: #4f91cd"> Most number of catches by a fielder in a match </th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ most_catches.1 }}</td>
+                <td>{{ most_catches.2 }} Catches</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

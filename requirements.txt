@@ -1,0 +1,4 @@
+requests
+django==2.2.3
+colour
+Pillow

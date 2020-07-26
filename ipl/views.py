@@ -19,10 +19,19 @@ def get_top_team(match, season):
 
 
 #
+# function for getting top teams of the season
+#
+def get_top_team_whole_season(match):
+    obj = match.filter(winner__isnull=False).values_list('winner').annotate(
+        dcount=Count('winner')).order_by('-dcount')[0]
+    return obj
+
+
+#
 # function for getting most number of toss winner of the season
 #
 def get_tos_winner(match, season):
-    return match.filter(season=season).values_list('toss_winner', flat=True).annotate(
+    return match.filter(season=season).values_list('toss_winner').annotate(
         dcount=Count('toss_winner')).order_by('-dcount')[0]
 
 
@@ -30,7 +39,7 @@ def get_tos_winner(match, season):
 # function for getting max number of player award of the season
 #
 def get_max_player_award(match, season):
-    return match.filter(season=season).values_list('player_of_match', flat=True).annotate(
+    return match.filter(season=season).values_list('player_of_match').annotate(
         dcount=Count('player_of_match')).order_by('-dcount')[0]
 
 
@@ -76,8 +85,9 @@ def win_percentage_toss(match, season):
 # function for getting location  hosted most number of matches of the season
 #
 def location_most_matches(match, season):
-    return match.filter(season=season).values_list('city').annotate(
+    obj = match.filter(season=season).values_list('city').annotate(
         dcount=Count('city')).order_by('-dcount')[0]
+    return obj
 
 
 #
@@ -162,6 +172,8 @@ def get_details(request, pk):
 
     won_tos_match = won_toss_and_match(match, season)
     most_catches = most_number_catches(season)
+
+    most_win = get_top_team_whole_season(match)
     return render(request, 'season_detail.html', {'season': season,
                                                   'winner': winner,
                                                   'tos_winner': tos_winner,
@@ -174,4 +186,5 @@ def get_details(request, pk):
                                                   'high_margin_wicket': high_margin_wicket,
                                                   'won_toss_match': won_tos_match,
                                                   'most_catches': most_catches,
-                                                  'percent_details': percent_details})
+                                                  'percent_details': percent_details,
+                                                  'most_win': most_win})

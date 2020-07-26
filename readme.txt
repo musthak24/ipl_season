@@ -15,6 +15,7 @@ To install requirements:
 
 pip install -r requirement.txt
 
+then run the server using the command : python manage.py runserver
 
 The data is uploaded to database from the given csv file using management command.
 

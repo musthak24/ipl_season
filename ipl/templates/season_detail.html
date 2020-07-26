@@ -33,7 +33,7 @@
             </thead>
             <tbody>
             <tr>
-                <td colspan="4">1.{{ tos_winner }}</td>
+                <td colspan="4">1.{{ tos_winner.0 }} - {{ tos_winner.1 }} times</td>
             </tr>
             </tbody>
         </table>
@@ -47,7 +47,7 @@
             </thead>
             <tbody>
             <tr>
-                <td colspan="4">1.{{ player_award }}</td>
+                <td colspan="4">1.{{ player_award.0 }} - {{ player_award.1 }} times</td>
             </tr>
             </tbody>
         </table>
@@ -60,7 +60,10 @@
             </thead>
             <tbody>
             <tr>
-                <td colspan="4">1.{{ topper }}</td>
+                <td colspan="4">{{ topper }} - Season {{ season }}</td>
+            </tr>
+            <tr>
+                <td colspan="4">{{ most_win.0 }} - Whole season</td>
             </tr>
             </tbody>
         </table>
